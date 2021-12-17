@@ -17,14 +17,8 @@ configs = {
         'app_name': 'Spark MLlib',
         'spark_home': '/usr/local/spark',
         'spark_log_level': 'WARN',
-        'spark_log_file': 'spark.log',
-        'spark_log_max_size': '10240',
-        'spark_log_max_retained_size': '10240',
-        'spark_log_enable_compression': 'true',
-        'spark_log_compression_codec': 'snappy',
-        'spark_log_file_max_backups': '10',
-        'spark_log_file_max_retained_size': '10240',
-        'data_path': 'data/',
-        'data_file': 'IMDB.csv',
-    })
+        'spark_log_file': 'spark.log'
+    }),
+    'data-path': 'data/',
+    'data-file': 'review_dataset.csv',
 }
