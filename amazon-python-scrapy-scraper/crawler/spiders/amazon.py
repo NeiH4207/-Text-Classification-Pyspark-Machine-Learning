@@ -36,6 +36,9 @@ class AmazonSpider(scrapy.Spider):
             url = urljoin("https://www.amazon.com",next_page)
             yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_response)
 
+    def contains_not_ascii(self, s):
+        return any(ord(c) >= 128 for c in s)
+    
     def parse_product_page(self, response):
         #yield response
         title = response.css('.review-title').extract()       
@@ -45,15 +48,13 @@ class AmazonSpider(scrapy.Spider):
         for item in zip(title, reviews):
             #create a dictionary to store the scraped info
             rate = int(float(BeautifulSoup(item[1]).text.replace(' out of 5 stars', '')))
-            all_items = {
-                'title' : BeautifulSoup(item[0]).text.replace('\n', ''),
-                'sentiment' : 'positive' if rate > 3 else 'negative',
+            review = BeautifulSoup(item[0]).text.replace('\n', '')
+            if self.contains_not_ascii(review):
+                continue
+            yield {
+                'review': review,
+                'sentiment' : 'positive' if rate > 3 else 'negative'
             }
-
-
-            #yield or give the scraped info to scrapy
-            yield all_items
-
         
 
 
