@@ -1,6 +1,16 @@
 # PySparkML_20211
 
+## Docker compose
+
+To host spark cluster, elasticsearch, rabbitmq, kibana
+
+```bash
+cd cluster
+docker-compose up -d
+```
+
 ### Install Python Lib
+
 ```sh
 conda activate 'your environment'
 pip install -r requirements.txt
