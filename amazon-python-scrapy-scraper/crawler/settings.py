@@ -16,8 +16,7 @@ NEWSPIDER_MODULE = 'crawler.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'crawler (+http://www.yourdomain.com)'
-
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
@@ -61,7 +60,7 @@ RETRY_TIMES = 5
 #EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
-
+postMessage = {"Info": {"ID": 1, "IP": "192.168.1.1"}}
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {'crawler.pipelines.CrawlerPipeline': 300}
