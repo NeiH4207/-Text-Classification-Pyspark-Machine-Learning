@@ -5,8 +5,7 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import re
 import json
-queries = ['soft sweaters', 'tshirt for men', 'bottle water', 'iphone', 'laptop', 'smartphone', 'pen', 'milk', 'food', 'led', 
-           'television', 'asus', 'wireless earbuds', 'samsung', 'apple', 'food', 'toys', 'clock', 'tree', 'rocket', 'guitar', 'piano']    ##Enter keywords here ['keyword1', 'keyword2', 'etc']
+queries = ['cake', 'tshirt', 'bottle']    ##Enter keywords here ['keyword1', 'keyword2', 'etc']
 API = 'ea6a51e37db608ee5ca4c8a99874d025'                        ##Insert Scraperapi API key here. Signup here for free trial with 5,000 requests: https://www.scraperapi.com/signup
 
 
@@ -33,15 +32,11 @@ class AmazonSpider(scrapy.Spider):
                 product_url = f"https://www.amazon.com/dp/{_asin}"
                 yield scrapy.Request(url=get_url(product_url), callback=self.parse_product_page, meta={'asin': asin})
             
-        next_page = response.xpath('//li[@class="a-last"]/a/@href').extract_first()
-        if next_page:
-            url = urljoin("https://www.amazon.com",next_page)
-            yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_response)
-        else:
-            # Inspired by your browsing history, Amazon has suggested that you visit the following pages:
-            url = 'https://www.amazon.com/gp/yourstore/home/ref=nav_yourstore_ya_ya'
-            # click on the first suggested link
-            url = urljoin
+            next_page = response.xpath('//li[@class="a-last"]/a/@href').extract_first()
+            if next_page:
+                url = urljoin("https://www.amazon.com",next_page)
+                yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_response)
+
             
     def contains_not_ascii(self, s):
         return any(ord(c) >= 128 for c in s)
