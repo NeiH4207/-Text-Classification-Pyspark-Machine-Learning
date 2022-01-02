@@ -10,7 +10,7 @@ services:
       - 9010:9000
     volumes:
       - hadoop_namenode:/hadoop/dfs/name
-      - /home/hienvq/Desktop/DS/PySparkML_20211/data:/mnt
+      - ../data:/mnt
     environment:
       - CLUSTER_NAME=test
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
@@ -128,6 +128,28 @@ services:
       - spark-master
     ports:
       - "8082:8082"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      
+  spark-worker-3:
+    image: bde2020/spark-worker:3.0.0-hadoop3.2
+    container_name: spark-worker-3
+    depends_on:
+      - spark-master
+    ports:
+      - "8083:8083"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      
+  spark-worker-4:
+    image: bde2020/spark-worker:3.0.0-hadoop3.2
+    container_name: spark-worker-4
+    depends_on:
+      - spark-master
+    ports:
+      - "8084:8084"
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
