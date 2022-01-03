@@ -6,3 +6,4 @@ src/__pycache__/*
 ./idea
 workspace*
 mnt/*
+node_modules/*
