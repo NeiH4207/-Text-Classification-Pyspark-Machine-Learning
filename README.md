@@ -69,7 +69,5 @@ Create a HDFS directory /data/input/.
 # step 1
 cd Crawl/amazon-js
 # step 2
-npm install
-# step 3
 node crawl.js
 ```
