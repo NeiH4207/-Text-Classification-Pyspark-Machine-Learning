@@ -61,4 +61,5 @@ Create a HDFS directory /data/input/.
 
 ```
   hdfs dfs -mkdir -p /data/input
+  hdfs dfs -put /mnt/reviews_1.json
 ```
